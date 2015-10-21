@@ -17,7 +17,7 @@ reset=`tput sgr0`
 ###
 #While dongusu
 ###
-while read -r srv
+for srv in `cat $1`
 do
 
 ###
@@ -29,19 +29,19 @@ do
     if [[ $ver = *"el7"* ]]
     then
       scp ./centos/tzdata-2015g-1.el7.noarch.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-1.el7.noarch.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-1.el7.noarch.rpm>>yum-$srv.log
       echo "$srv -> Centos 7 Timezone guncellemesi yapildi!"
     fi
     if [[ $ver = *"el6"* ]]
     then
       scp ./centos/tzdata-2015g-2.el6.noarch.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-2.el6.noarch.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-2.el6.noarch.rpm>>yum-$srv.log
       echo "$srv -> Centos 6 Timezone guncellemesi yapildi!"
     fi
     if [[ $ver = *"el5"* ]]
     then
       scp ./centos/tzdata-2015g-1.el5.x86_64.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-1.el5.x86_64.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-1.el5.x86_64.rpm>>yum-$srv.log
       echo "$srv -> Centos 5 Timezone guncellemesi yapildi!"
     fi
   fi
@@ -54,7 +54,7 @@ do
     if [[ $ver = *"el6"* ]]
     then
       scp ./rhel/tzdata-2015g-2.el6.noarch.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-2.el6.noarch.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-2.el6.noarch.rpm>>yum-$srv.log
       echo "$srv -> Red Hat 6 Timezone guncellemesi yapildi!"
     fi
     if [[ $ver = *"el5"* ]]
@@ -67,25 +67,25 @@ do
     if [[ $ver = *"release-7"* ]]
     then
       scp ./oracle/tzdata-2015g-1.el7.noarch.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-1.el7.noarch.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-1.el7.noarch.rpm>>yum-$srv.log
       echo "$srv -> Oracle Linux 7 Timezone guncellemesi yapildi!"
     fi
     if [[ $ver = *"release-6"* ]]
     then
       scp ./oracle/tzdata-2015g-2.el6.noarch.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-2.el6.noarch.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-2.el6.noarch.rpm>>yum-$srv.log
       echo "$srv -> Oracle Linux 6 Timezone guncellemesi yapildi!"
     fi
     if [[ $ver = *"release-5"* ]]
     then
       scp ./oracle/tzdata-2015g-1.el5.x86_64.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-1.el5.x86_64.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-1.el5.x86_64.rpm>>yum-$srv.log
       echo "$srv -> Oracle Linux 5 Timezone guncellemesi yapildi!"
     fi
     if [[ $ver = *"release-4"* ]]
     then
       scp ./oracle/tzdata-2015g-1.0.1.el4.noarch.rpm $srv:/tmp/
-      ssh $srv yum update -y /tmp/tzdata-2015g-1.0.1.el4.noarch.rpm>>yum-$srv.log
+      ssh $srv yum update --disablerepo=* -y /tmp/tzdata-2015g-1.0.1.el4.noarch.rpm>>yum-$srv.log
       echo "$srv -> Oracle Linux 4 Timezone guncellemesi yapildi!"
     fi
   fi
@@ -113,4 +113,4 @@ do
     echo "$srv -> DST degisikligi ${red}BASARISIZ!${reset}"
   fi
 
-done < $1
+done
